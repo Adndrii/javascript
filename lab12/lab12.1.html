@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Calculate Trigonometric Functions</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+
+      label {
+        display: block;
+        margin: 10px 0 5px;
+      }
+
+      select,
+      input,
+      button {
+        padding: 8px;
+        width: 100%;
+        margin-bottom: 10px;
+      }
+
+      button {
+        background-color: rgb(118, 126, 119);
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: rgb(165, 173, 166);
+      }
+    </style>
+  </head>
+  <body>
+    <label for="function">Function</label>
+    <select id="function">
+      <option value="sin">sin</option>
+      <option value="cos">cos</option>
+      <option value="tg">tg</option>
+    </select>
+
+    <label for="start">Start</label>
+    <input id="start" type="text" name="start" onchange="isNumb(this)" />
+
+    <label for="end">End</label>
+    <input id="end" type="text" name="end" onchange="isNumb(this)" />
+
+    <label for="step">Step</label>
+    <input id="step" type="text" name="step" onchange="isNumb(this)" />
+
+    <button type="submit" onclick="calculate()">Calculate</button>
+
+    <script>
+      function calculate() {
+        const func_name = document.getElementById("function").value;
+        const start = parseFloat(document.getElementById("start").value);
+        const end = parseFloat(document.getElementById("end").value);
+        const step = parseFloat(document.getElementById("step").value);
+
+        localStorage.setItem("func_name", func_name);
+        localStorage.setItem("start", start);
+        localStorage.setItem("end", end);
+        localStorage.setItem("step", step);
+
+        window.location.href = "lab12.1.table.html";
+      }
+
+      function isNumb(fld) {
+        const value = fld.value;
+        if (isNaN(value)) {
+          alert("Не цифра");
+          fld.focus();
+          fld.select();
+          return false;
+        }
+        return true;
+      }
+    </script>
+  </body>
+</html>

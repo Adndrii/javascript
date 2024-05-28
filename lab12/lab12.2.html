@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Облік надходження товарів</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+
+      h2,
+      h3 {
+        color: #333;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+
+      table,
+      th,
+      td {
+        border: 1px solid #ddd;
+      }
+
+      th,
+      td {
+        padding: 8px;
+        text-align: left;
+      }
+
+      th {
+        background-color: #f2f2f2;
+      }
+
+      tr:nth-child(even) {
+        background-color: #f9f9f9;
+      }
+
+      tr:hover {
+        background-color: #f1f1f1;
+      }
+
+      #editForm {
+        margin-top: 20px;
+        padding: 20px;
+        border: 1px solid #ddd;
+        background-color: #f9f9f9;
+      }
+
+      #editForm label {
+        display: block;
+        margin-bottom: 8px;
+      }
+
+      #editForm input,
+      #editForm select,
+      #editForm button {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+      }
+
+      #editForm button {
+        background-color: rgb(118, 126, 119);
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+
+      #editForm button:hover {
+        background-color: rgb(165, 173, 166);
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Облік надходження товарів</h2>
+    <table border="0" id="product-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Cost for Unit</th>
+          <th>Amount</th>
+          <th>Total Cost</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Desk</td>
+          <td>12000</td>
+          <td>5</td>
+          <td>60000</td>
+        </tr>
+        <tr>
+          <td>Kitchen table</td>
+          <td>8000</td>
+          <td>10</td>
+          <td>80000</td>
+        </tr>
+        <tr>
+          <td>Chair</td>
+          <td>20</td>
+          <td>1200</td>
+          <td>12000</td>
+        </tr>
+        <tr>
+          <td>Book shelf</td>
+          <td>14200</td>
+          <td>4</td>
+          <td>68800</td>
+        </tr>
+        <tr>
+          <th colspan="3">Total</th>
+          <td>220800</td>
+        </tr>
+      </tbody>
+    </table>
+    <div id="editForm">
+      <h3>Change cost and amount</h3>
+      <label for="Name">Name:</label>
+      <select id="Name">
+        <option value="Desk">Desk</option>
+        <option value="Kitchen table">Kitchen table</option>
+        <option value="Chair">Chair</option>
+        <option value="Book shelf">Book shelf</option></select
+      ><br />
+      <label for="Cost">Cost:</label>
+      <input type="number" id="Cost" required /><br />
+      <label for="Amount">Amount:</label>
+      <input type="number" id="Amount" required /><br />
+      <button type="submit" onclick="change_product()">Змінити товар</button>
+    </div>
+
+    <script>
+      function change_product() {
+        let name = document.getElementById("Name").value;
+        let cost = parseInt(document.getElementById("Cost").value);
+        let amount = parseInt(document.getElementById("Amount").value);
+
+        let table = document.getElementById("product-table");
+
+        let total_cost = 0;
+        for (let i = 1; i < table.rows.length - 1; i++) {
+          if (table.rows[i].cells[0].innerHTML == name) {
+            table.rows[i].cells[1].innerHTML = cost;
+            table.rows[i].cells[2].innerHTML = amount;
+            table.rows[i].cells[3].innerHTML = cost * amount;
+          }
+          total_cost += parseInt(table.rows[i].cells[3].innerHTML);
+        }
+        table.rows[table.rows.length - 1].cells[1].innerHTML = total_cost;
+      }
+    </script>
+  </body>
+</html>

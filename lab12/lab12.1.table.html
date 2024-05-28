@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Calculation Results</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+      }
+
+      th {
+        background-color: #f2f2f2;
+      }
+
+      tr:nth-child(even) {
+        background-color: #f9f9f9;
+      }
+
+      tr:hover {
+        background-color: #f1f1f1;
+      }
+    </style>
+  </head>
+  <body>
+    <button onclick="goBack()">Back</button>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const func_name = localStorage.getItem("func_name");
+        const start = parseFloat(localStorage.getItem("start"));
+        const end = parseFloat(localStorage.getItem("end"));
+        const step = parseFloat(localStorage.getItem("step"));
+
+        const func =
+          func_name === "sin"
+            ? Math.sin
+            : func_name === "cos"
+            ? Math.cos
+            : Math.tan;
+
+        const table = document.createElement("table");
+        table.border = "1";
+
+        let trow = document.createElement("tr");
+        trow.innerHTML = `
+          <th colspan="2">Angle</th>
+          <th rowspan="2">${func_name}</th>
+        `;
+        table.appendChild(trow);
+
+        trow = document.createElement("tr");
+        trow.innerHTML = `
+          <th>Degrees</th>
+          <th>Radians</th>
+        `;
+        table.appendChild(trow);
+
+        for (let i = start; i <= end; i += step) {
+          const degrees = i;
+          const radians = i * (Math.PI / 180);
+          const result = func(radians);
+
+          trow = document.createElement("tr");
+          trow.innerHTML = `
+            <td>${degrees}</td>
+            <td>${radians.toFixed(2)}</td>
+            <td>${result.toFixed(3)}</td>
+          `;
+          table.appendChild(trow);
+        }
+
+        document.body.appendChild(table);
+      });
+      function goBack() {
+        window.location.href = "lab12.1.html";
+      }
+    </script>
+  </body>
+</html>
