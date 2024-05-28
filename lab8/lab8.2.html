@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <body onclick="handle_event(event)">
+    <img src="bigpanda.jpg" style="width: 400px" />
+    <figcaption>підпис</figcaption>
+
+    <script>
+      let count = 0;
+      function handle_event(event) {
+        let e = event || window.event;
+        let elem = event.target;
+
+        switch (elem.tagName) {
+          case "IMG":
+            console.log(elem.src);
+            if (count == 0) {
+              elem.src = "./smallpanda.jpg";
+              count = 1;
+            } else if (count == 1) {
+              elem.src = "./bigpanda.jpg";
+              count = 0;
+            }
+            elem = document.querySelector("figcaption");
+          case "FIGCAPTION":
+            if (elem.style.color == "blue") elem.style.color = "red";
+            else elem.style.color = "blue";
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>lab10</title>
+  </head>
+  <body>
+    <label for="select">Choose image</label>
+    <select id="select" onchange="change(this)">
+      <option value="">choose image</option>
+      <option value="earthspirit">Earth Spirit</option>
+      <option value="stormspirit">Storm Spirit</option>
+      <option value="emberspirit">Ember Spirit</option>
+      <option value="voidspirit">Void Spirit</option>
+    </select>
+
+    <br />
+
+    <image id="img" style="width: 800px; height: 500px"></image>
+
+    <script>
+      var photo = new Array();
+
+      photo["earthspirit"] = new Image(400, 400);
+      photo["earthspirit"].src = "earthspirit.jpg";
+      photo["stormspirit"] = new Image(400, 400);
+      photo["stormspirit"].src = "stormspirit.jpg";
+      photo["emberspirit"] = new Image();
+      photo["emberspirit"].src = "emberspirit.jpg";
+      photo["voidspirit"] = new Image();
+      photo["voidspirit"].src = "voidspirit.jpg";
+
+      function change(e) {
+        let name = e.options[e.selectedIndex].value;
+        console.log(name);
+        console.log(photo[name].src);
+        document.getElementById("img").src = photo[name].src;
+      }
+    </script>
+  </body>
+</html>

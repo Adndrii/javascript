@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+
+        </title>
+    </head>
+    <body>
+        <h1>П'ять подій з мишкою</h1>
+        <span id="second" onclick="second_row()">Клацніть на мене мишкою</span><br>
+        <span id="third" onmousedown="third_row_down(this)" onmouseup="third_row_up(this)">На цьому тексті натисніть, потримайте і відпустіть ліву кнопку мишки</span><br>
+        <span id="fourth" onmouseover="fourth_row(this)" onmouseout="fourth_row(this)">Повільно проведіть курсором мишки по цій написи</span><br>
+
+        <script>
+            function second_row(){
+                let second = document.querySelector("#second")
+                if(second.style.color == "white"){
+                    second.style.fontSize = "16px";
+                    second.style.color = "black";
+                    second.style.backgroundColor = "white";
+                }
+                else{
+                    second.style.fontSize = "48px";
+                    second.style.color = "white";
+                    second.style.backgroundColor = "blue";
+                }
+            }
+
+            function third_row_down(elem){
+                elem.style.backgroundColor = "green"
+            }
+            function third_row_up(elem){
+                elem.style.backgroundColor = "yellow"
+            }
+
+            function fourth_row(elem){
+                if(elem.style.backgroundColor == "blue")
+                    elem.style.backgroundColor = "red"
+                else
+                    elem.style.backgroundColor = "blue"
+            }
+        </script>
+    </body>
+</html>

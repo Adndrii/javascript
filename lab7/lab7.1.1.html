@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Color Change</title>
+  </head>
+  <body>
+    <div>
+      <h2 id="heading" onclick="changeColor('heading')">
+        Доступ до властивостей і методів
+      </h2>
+      <p id="paragraph" onclick="changeColorAll()">Колекція all</p>
+      <div id="div" onclick="changeColor('div')">Метод getElementById()</div>
+    </div>
+
+    <script>
+      // the initial colors
+      document.getElementById("heading").style.backgroundColor = "yellow";
+      document.getElementById("div").style.backgroundColor = "yellow";
+      document.getElementById("paragraph").style.color = "red";
+
+      function changeColor(id) {
+        var element = document.getElementById(id);
+        var currentColor = element.style.color;
+        var currentBackground = element.style.backgroundColor;
+
+        if (currentColor === "black") {
+          element.style.color = "white";
+          element.style.backgroundColor = "blue";
+        } else {
+          element.style.color = "black";
+          element.style.backgroundColor = "yellow";
+        }
+      }
+
+      function changeColorAll() {
+        var element = document.all[9];
+        console.log(element);
+        var currentColor = element.style.color;
+        var currentBackground = element.style.backgroundColor;
+
+        if (currentColor === "white") {
+          element.style.color = "red";
+          element.style.backgroundColor = "white";
+        } else {
+          element.style.color = "white";
+          element.style.backgroundColor = "green";
+        }
+      }
+    </script>
+  </body>
+</html>

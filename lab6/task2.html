@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Lab6.2</title>
+    <script type="text/javascript">
+      var timeStr, dateStr;
+      function clock() {
+        now = new Date();
+        hours = now.getHours();
+        minutes = now.getMinutes();
+        seconds = now.getSeconds();
+        timeStr = "" + hours;
+        timeStr += (minutes < 10 ? ":0" : ":") + minutes;
+        timeStr += (seconds < 10 ? ":0" : ":") + seconds;
+        document.clock.time.value = timeStr;
+        date = now.getDate();
+        month = now.getMonth() + 1;
+        year = now.getFullYear();
+        dateStr = "" + month;
+        dateStr += (date < 10 ? "/0" : "/") + date;
+        dateStr += "/" + year;
+        document.clock.date.value = dateStr;
+        Time = setTimeout("clock()", 1000);
+      }
+    </script>
+  </head>
+  <body onload="clock()">
+    <form name="clock">
+      Час:
+      <input type="text" name="time" size="8" /><br />
+      Дата:
+      <input type="text" name="date" size="8" /><br />
+    </form>
+  </body>
+</html>

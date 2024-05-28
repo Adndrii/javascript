@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Реакція на подію</title>
+    <meta http-equiv="Content-Type" content="text / html; charset = UTF-8" />
+    <style>
+      H1 {
+        color: #ff00ff;
+      }
+      #k1 {
+        position: absolute;
+        left: 50;
+        top: 200;
+        width: 300;
+        height: 100;
+        background-color: blue;
+      }
+      #k2 {
+        position: relative;
+        left: 50;
+        top: 25;
+        width: 200;
+        height: 50;
+        background-color: yellow;
+      }
+    </style>
+  </head>
+  <body id="B" bgcolor="AAAAAA" onclick="rodEl ()" style="height: 600px">
+    <h1 id="HH" onclick="H_l ()">КОЛІР</h1>
+    <div id="k1" onclick="D_l (this)">
+      bbbbbbbbbb
+      <div id="k2" style="background-color: yellow" onclick="D_2 (this)">
+        yyyyyyyyyy
+      </div>
+    </div>
+  </body>
+
+  <script>
+    /* Функція запускається при натисканні мишкою по
+        будь-якій точці документа */
+    function rodEl() {
+      // Зміна кольору фону документа
+      var z = document.all.B.bgColor;
+      if (z != "#777777") {
+        z = "#777777";
+      } else {
+        z = "AAAAAA";
+      }
+      document.all.B.bgColor = z;
+    }
+    function D_l(el) {
+      // Зміна кольору зовнішнього прямокутника
+      window.event.cancelBubble = true;
+      console.log(el);
+      if (el.style.backgroundColor != "red") z = "red";
+      else el.style.backgroundColor = "green";
+      //document.all.k1.style.backgroundColor = z
+    }
+    /* Function D_2 ()
+        {// Зміна кольору внутрішнього прямокутника
+            window.event.cancelBubble = true
+            var z = document.all.k2.style.backgroundColor
+        if (z == "# ff00ff" || z == 'rgb (255, 0, 255)') {z = "# 00ffff"}
+        else {z = "ff00ff"}
+        document.all.k2.style.backgroundColor = z
+        } */
+    function D_2(thi) {
+      // Зміна кольору внутрішнього прямокутника
+      window.event.cancelBubble = true;
+      var z = thi.style.backgroundColor;
+      if (z == "#ff00ff" || z == "rgb(255, 0, 255)") {
+        z = "#00ffff";
+      } else {
+        z = "ff00ff";
+      }
+      thi.style.backgroundColor = z;
+    }
+    function H_l() {
+      // Зміна кольору слова "Колір"
+      window.event.cancelBubble = true;
+      var z = document.all.HH.style.color;
+      // alert ( "1. Z =" + document.all.HH.style.color)
+      if (z == "#aa00aa" || z == "rgb(170, 0, 170)") {
+        z = "#00ffff";
+        // alert ( "2. Z =" + z)
+      } else {
+        z = "#aa00aa";
+      }
+      document.all.HH.style.color = z;
+    }
+  </script>
+</html>

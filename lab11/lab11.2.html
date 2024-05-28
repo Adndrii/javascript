@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dragging</title>
+    <style>
+      #container {
+        position: relative;
+        width: 500px;
+        height: 500px;
+        background-color: grey;
+      }
+      #square {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        background-color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="container"
+      style="width: 500px; height: 500px; top: 210px; left: 610px"
+    >
+      <div
+        id="square"
+        style="top: 225px; left: 225px; width: 50px; height: 50px"
+      ></div>
+    </div>
+
+    <script>
+      var flag = false;
+      var offset = { x: 0, y: 0 };
+      var container = document.getElementById("container");
+      var square = document.getElementById("square");
+      var constraint_x =
+        parseInt(container.style.width) - parseInt(square.style.width);
+      var constraint_y =
+        parseInt(container.style.height) - parseInt(square.style.height);
+
+      window.onmousemove = drag;
+      square.onmouseup = release;
+      square.onmousedown = capture;
+
+      function drag(evt) {
+        var event = evt || window.event;
+        if (flag) {
+          var square = document.getElementById("square");
+          let y = event.clientY - offset.y;
+          let x = event.clientX - offset.x;
+          if (y < constraint_y && y > 0) square.style.top = y + "px";
+          if (x < constraint_x && x > 0) square.style.left = x + "px";
+        }
+      }
+
+      function release() {
+        flag = false;
+      }
+
+      function capture(evt) {
+        flag = true;
+        var square = document.getElementById("square");
+        var event = evt || window.event;
+        offset.x = event.clientX - square.offsetLeft;
+        offset.y = event.clientY - square.offsetTop;
+      }
+    </script>
+  </body>
+</html>

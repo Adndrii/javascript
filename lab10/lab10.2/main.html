@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ellipse Builder</title>
+    <style>
+      .pixel {
+        width: 1px;
+        height: 1px;
+        background-color: black;
+      }
+      .empty {
+        width: 1px;
+        height: 1px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Ellipse Builder</h2>
+
+    <label for="majorAxis">горизонтальна а:</label>
+    <input type="number" id="majorAxis" /><br />
+    <label for="minorAxis">вертикальна b :</label>
+    <input type="number" id="minorAxis" /><br />
+    <button onclick="buildEllipse()">Побудувати</button>
+
+    <h3>Mosaic</h3>
+    <table id="mosaicEllipse"></table>
+
+    <h3>SVG</h3>
+    <svg id="svgEllipse" width="400" height="200"></svg>
+
+    <h3>Canvas</h3>
+    <canvas id="canvasEllipse" width="400" height="200"></canvas>
+
+    <script>
+      function buildEllipse() {
+        const majorAxis = parseFloat(
+          document.getElementById("majorAxis").value
+        );
+        const minorAxis = parseFloat(
+          document.getElementById("minorAxis").value
+        );
+
+        const mosaicEllipseContainer = document.getElementById("mosaicEllipse");
+        mosaicEllipseContainer.innerHTML = "";
+
+        const majorAxisSquared = majorAxis * majorAxis;
+        const minorAxisSquared = minorAxis * minorAxis;
+
+        for (let y = -50; y <= 50; y++) {
+          const row = document.createElement("tr");
+          for (let x = -100; x <= 100; x++) {
+            const dx = x;
+            const dy = y;
+
+            if (
+              (dx * dx) / majorAxisSquared + (dy * dy) / minorAxisSquared <=
+              1
+            ) {
+              const pixel = document.createElement("td");
+              pixel.classList.add("pixel");
+              row.appendChild(pixel);
+            } else {
+              const empty = document.createElement("td");
+              empty.classList.add("empty");
+              row.appendChild(empty);
+            }
+          }
+          mosaicEllipseContainer.appendChild(row);
+        }
+
+        const svgEllipse = document.getElementById("svgEllipse");
+        svgEllipse.innerHTML = `<ellipse cx="200" cy="100" rx="${majorAxis}" ry="${minorAxis}" fill="black" />`;
+
+        const canvasEllipse = document.getElementById("canvasEllipse");
+        const ctx = canvasEllipse.getContext("2d");
+        ctx.clearRect(0, 0, canvasEllipse.width, canvasEllipse.height);
+        ctx.beginPath();
+        ctx.ellipse(200, 100, majorAxis, minorAxis, 0, 0, Math.PI * 2);
+        ctx.fillStyle = "black";
+        ctx.fill();
+        ctx.closePath();
+      }
+    </script>
+  </body>
+</html>
